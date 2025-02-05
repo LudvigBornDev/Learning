@@ -6,19 +6,19 @@ const props = defineProps({
         default: () => {}
     }
 })
-console.log(movie.poster_path)
+// console.log(movie.poster_path)
 </script>
 
 <template>
     <div class="movie">
-        <img :src="`./asstes/img/${movie.poster_path}`" :alt="movie.poster_path" class="movie-img">
+        <img :src="`./src/assets/img/${movie.poster_path}`" :alt="movie.poster_path" class="movie-img">
         <div>
             <div class="movie-name">
-                {{ movie.original_title }}
-                {{ movie.release_date }}
+                {{ movie.original_title }} ({{ movie.release_date }})
+            </div>
+            
                 <div class="movie-overview">{{ movie.overview }}</div>
                 {{ movie.isWatched ? "Yes" : "No"}}
-            </div>
         </div>
         
     </div>

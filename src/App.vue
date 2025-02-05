@@ -9,13 +9,14 @@
     <header class="header">
     <img src="./assets/img/logo.png" alt="" class="header-logo">
     <h2>My favorite movies</h2>
-    <div class="movies">
+
+  </header>
+  <div class="movies">
       <!-- {{ MovieStore.movies }} -->
         <Movie v-for="movie in MovieStore.movies" :key="movie.id" :movie="movie">
 
         </Movie>
     </div>
-  </header>
   </main>
 </template>
 
