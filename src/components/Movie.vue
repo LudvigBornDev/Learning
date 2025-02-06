@@ -1,5 +1,8 @@
 <script setup>
-const props = defineProps({
+import { useMovieStore } from '@/stores/MovieStore';
+const MovieStore = useMovieStore();
+useMovieStore
+defineProps({
     movie: {
         type:Object,
         required:true,
@@ -16,16 +19,41 @@ const props = defineProps({
             <div class="movie-name">
                 {{ movie.original_title }} ({{ movie.release_date }})
             </div>
-            
+
                 <div class="movie-overview">{{ movie.overview }}</div>
-                {{ movie.isWatched ? "Yes" : "No"}}
+                <!-- {{ movie.isWatched ? "Yes" : "No"}} -->
+                  <div class="movie-buttons">
+                    <button @click="MovieStore.toggleWatche(movie.id)" class="btn movie-buttons-watched">
+                      <span v-if="!movie.isWatched">Watched</span>
+                      <span v-else>Unwatched</span>
+                    </button>
+                    <button @click="MovieStore.deleteMovie(movie.id)" class="btn movie-buttons-delete">delete</button>
+                  </div>
         </div>
-        
+
     </div>
 
 </template>
 
 <style scoped>
+
+.btn {
+  border: none;
+  width: 100px;
+  height: 40px;
+  font-size: 14px;
+  margin: 0 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #efefef;
+}
+.btn:hover {
+  opacity: 0.7;
+}
+.btn_green {
+  background: #37df5c;
+}
+
 .movie {
   display: grid;
   grid-template-columns: 200px 1fr;
