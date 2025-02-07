@@ -9,12 +9,11 @@ defineProps({
         default: () => {}
     }
 })
-// console.log(movie.poster_path)
 </script>
 
 <template>
     <div class="movie">
-        <img :src="`./src/assets/img/${movie.poster_path}`" :alt="movie.poster_path" class="movie-img">
+        <img :src="`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`" :alt="movie.poster_path" class="movie-img">
         <div>
             <div class="movie-name">
                 {{ movie.original_title }} ({{ movie.release_date }})

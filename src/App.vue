@@ -1,7 +1,8 @@
 <script setup>
   import { useMovieStore } from './stores/MovieStore';
   import Movie from './components/Movie.vue';
-  import Search from './components/Search.vue';
+import Search from './components/Search.vue';
+  
   const MovieStore = useMovieStore();
 </script>
 
