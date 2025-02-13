@@ -1,26 +1,25 @@
 <script setup>
-  import {ref} from 'vue'
-  import { useSearchStore } from '@/stores/SearchStore';
-  import Loader from './Loader.vue';
-  import Movie from './Movie.vue';
-  const searchMovie = ref('')
-  const searchStore = useSearchStore()  
+import { ref } from 'vue'
+import { useSearchStore } from '@/stores/SearchStore'
+import Loader from './Loader.vue'
+import Movie from './Movie.vue'
+const searchMovie = ref('')
+const searchStore = useSearchStore()
 </script>
 
 <template>
   <form @submit.prevent="searchStore.getMovies(searchMovie)">
-    <input type="text" class="search-input" placeholder="input Movie" v-model="searchMovie">
+    <input type="text" class="search-input" placeholder="input Movie" v-model="searchMovie" />
   </form>
-  <Loader v-if="searchStore.loader"/>
+
+  <Loader v-if="searchStore.loader" />
   <div v-else>
-    <Movie  v-for="movie in searchStore.movies" :key="movie.id" :movie="movie"/>
+    <Movie v-for="movie in searchStore.movies" :key="movie.id" :movie="movie" :isSearch="true" />
   </div>
-  
 </template>
 
 <style scoped>
-
-.search-input{
+.search-input {
   border: 1px solid #e7e7e7;
   width: 100%;
   height: 40px;
@@ -28,6 +27,4 @@
   margin-bottom: 20px;
   border-radius: 10px;
 }
-
 </style>
-

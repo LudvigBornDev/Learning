@@ -1,41 +1,52 @@
 <script setup>
-import { useMovieStore } from '@/stores/MovieStore';
-const MovieStore = useMovieStore();
+import { useMovieStore } from '@/stores/MovieStore'
+import { useSearchStore } from '@/stores/SearchStore'
+const MovieStore = useMovieStore()
+const SearchStore = useSearchStore()
+
 useMovieStore
 defineProps({
-    movie: {
-        type:Object,
-        required:true,
-        default: () => {}
-    }
+  movie: {
+    type: Object,
+    required: true,
+    default: () => {},
+  },
+  isSearch: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 })
 </script>
 
 <template>
-    <div class="movie">
-        <img :src="`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`" :alt="movie.poster_path" class="movie-img">
-        <div>
-            <div class="movie-name">
-                {{ movie.original_title }} ({{ movie.release_date }})
-            </div>
+  <div class="movie">
+    <img
+      :src="`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`"
+      :alt="movie.poster_path"
+      class="movie-img"
+    />
+    <div>
+      <div class="movie-name">{{ movie.original_title }} ({{ movie.release_date }})</div>
 
-                <div class="movie-overview">{{ movie.overview }}</div>
-                <!-- {{ movie.isWatched ? "Yes" : "No"}} -->
-                  <div class="movie-buttons">
-                    <button @click="MovieStore.toggleWatche(movie.id)" class="btn movie-buttons-watched">
-                      <span v-if="!movie.isWatched">Watched</span>
-                      <span v-else>Unwatched</span>
-                    </button>
-                    <button @click="MovieStore.deleteMovie(movie.id)" class="btn movie-buttons-delete">delete</button>
-                  </div>
-        </div>
-
+      <div class="movie-overview">{{ movie.overview }}</div>
+      <div class="movie-buttons" v-if="!isSearch">
+        <button @click="MovieStore.toggleWatche(movie.id)" class="btn movie-buttons-watched">
+          <span v-if="!movie.isWatched">Watched</span>
+          <span v-else>Unwatched</span>
+        </button>
+        <button @click="MovieStore.deleteMovie(movie.id)" class="btn movie-buttons-delete">
+          delete
+        </button>
+      </div>
+      <div class="movie-buttons" v-else>
+        <button @click="SearchStore.addToUserStore(movie)" class="btn btn_green">Add</button>
+      </div>
     </div>
-
+  </div>
 </template>
 
 <style scoped>
-
 .btn {
   border: none;
   width: 100px;
